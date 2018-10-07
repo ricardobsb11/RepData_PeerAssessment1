@@ -34,7 +34,9 @@ df_day <-  ddply(df,~date,summarise,total = sum(steps),mean=mean(steps))
 ```
 ### plotting the histogram
 ```{r, echo=TRUE}
+png(filename = "/home/ricardo/Documents/cursos/coursera/figures/hist1.png")
 hist(df_day$total,breaks = 60,main = "Histogram of number of steps by day",xlab = "Number of Steps",col = "cyan")
+dev.off()
 ```
 
 ### The mean and median of the total number of steps taken per day
@@ -47,8 +49,10 @@ median(df$steps,na.rm = TRUE)
 # mean and median from the steps taken each day
 df_mean <-  ddply(df,~date,summarise,mean = mean(steps),median = median(steps))
 # Time series plot of the average number of steps taken
+png(filename = "/home/ricardo/Documents/cursos/coursera/figures/time.png")
 qplot(x=date, y=mean,data=df_mean, na.rm=TRUE,main="Time series plot\n of the average number of steps taken",
       xlab="Date", ylab="Steps by day (Mean)") + stat_smooth(colour="red")
+dev.off()
 ```
 
 ### summarizing the data by day:
@@ -87,7 +91,9 @@ head(df2,3)
 ```{r, echo=TRUE}
 # summarizing the data by day
 df2_day <-  ddply(df2,~date,summarise,total = sum(steps),mean=mean(steps))
+png(filename = "/home/ricardo/Documents/cursos/coursera/figures/hist2.png")
 hist(df2_day$total,breaks = 60,main = "Histogram of number total of steps by day",xlab = "Number of Steps",col = "magenta")
+dev.off()
 ```
 
 Mean and median of total number of steps taken per day after filling NA's values:
@@ -121,9 +127,11 @@ weekend<-ddply(df2_weekend,~interval,summarise,total=sum(steps))
 
 Panel plot containing a time series plot of the 5-minute interval
 ```{r, echo=TRUE}
+png(filename = "/home/ricardo/Documents/cursos/coursera/figures/panel.png")
 par(mfrow=c(2,1)) 
 qplot(x=interval, y=total,data=weekday,main="Time series plot\n of number of steps taken\n weekdays")+ stat_smooth(colour="red")
 qplot(x=interval, y=total,data=weekend,main="Time series plot\n of number of steps taken\n weekends")+ stat_smooth(colour="red")
+dev.off()
 ```
 
 
